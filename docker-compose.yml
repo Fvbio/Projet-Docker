@@ -37,6 +37,8 @@ services:
       sh -c "
         cd /var/www/html &&
         composer update --no-dev --optimize-autoloader &&
+        npm install &&
+        npm run build &&
         php artisan key:generate --force &&
         php artisan migrate:fresh --seed --force &&
         php-fpm
@@ -52,13 +54,16 @@ services:
       - ./laravel-app:/var/www/html
       - ./.env.server2:/var/www/html/.env
     depends_on:
-      - php1
+      mysql:
+        condition: service_healthy 
     networks:
       - laravel_network
     command: >
       sh -c "
         cd /var/www/html &&
         composer update --no-dev --optimize-autoloader &&
+        npm install &&
+        npm run build &&
         php artisan key:generate --force &&
         php-fpm
       "
