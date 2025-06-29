@@ -19,8 +19,17 @@ else
   echo "Clé APP_KEY déjà présente, aucune génération nécessaire."
 fi
 
-
-php artisan migrate:fresh --seed --force
+# Migration uniquement si la table "migrations" n'existe pas
+if [ "$RUN_MIGRATIONS" = "true" ]; then
+  echo "Exécution des migrations sur php_app1"
+  if ! php artisan migrate:status | grep -q 'Yes'; then
+    php artisan migrate:fresh --seed --force
+  else
+    echo "Migrations déjà présentes"
+  fi
+else
+  echo "Pas de migration sur ce container"
+fi
 
 # Démarre php-fpm
 exec php-fpm

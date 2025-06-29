@@ -34,6 +34,8 @@ services:
         condition: service_healthy
     networks:
       - laravel_network
+    environment:
+    - RUN_MIGRATIONS=true
     command: ["/entrypoint.sh"]
 
   # Service PHP-FPM 2
@@ -49,6 +51,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy 
+    environment:
+    - RUN_MIGRATIONS=false
     networks:
       - laravel_network
     command: ["/entrypoint.sh"]
