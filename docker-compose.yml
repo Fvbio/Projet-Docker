@@ -28,21 +28,13 @@ services:
     volumes:
       - ./laravel-app:/var/www/html
       - ./.env.server1:/var/www/html/.env
+      - ./entrypoint.sh:/entrypoint.sh
     depends_on:
       mysql:
         condition: service_healthy
     networks:
       - laravel_network
-    command: >
-      sh -c "
-        cd /var/www/html &&
-        composer update --no-dev --optimize-autoloader &&
-        npm install &&
-        npm run build &&
-        php artisan key:generate --force &&
-        php artisan migrate:fresh --seed --force &&
-        php-fpm
-      "
+    command: ["/entrypoint.sh"]
 
   # Service PHP-FPM 2
   php2:
@@ -52,21 +44,15 @@ services:
     container_name: php_app2
     volumes:
       - ./laravel-app:/var/www/html
-      - ./.env.server2:/var/www/html/.env
+      - ./.env.server1:/var/www/html/.env
+      - ./entrypoint.sh:/entrypoint.sh
     depends_on:
       mysql:
         condition: service_healthy 
     networks:
       - laravel_network
-    command: >
-      sh -c "
-        cd /var/www/html &&
-        composer update --no-dev --optimize-autoloader &&
-        npm install &&
-        npm run build &&
-        php artisan key:generate --force &&
-        php-fpm
-      "
+    command: ["/entrypoint.sh"]
+
 
   # Nginx 1
   nginx1:
