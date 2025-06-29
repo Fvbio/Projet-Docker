@@ -28,7 +28,7 @@ services:
     volumes:
       - ./laravel-app:/var/www/html
       - ./.env.server1:/var/www/html/.env
-      - ./entrypoint.sh:/entrypoint.sh
+      - ./entrypoint1.sh:/entrypoint.sh
     depends_on:
       mysql:
         condition: service_healthy
@@ -45,7 +45,7 @@ services:
     volumes:
       - ./laravel-app:/var/www/html
       - ./.env.server2:/var/www/html/.env
-      - ./entrypoint.sh:/entrypoint.sh
+      - ./entrypoint2.sh:/entrypoint.sh
     depends_on:
       mysql:
         condition: service_healthy 
