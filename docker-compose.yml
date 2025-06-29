@@ -37,6 +37,8 @@ services:
       sh -c "
         cd /var/www/html &&
         composer update --no-dev --optimize-autoloader &&
+        npm install &&
+        npm run build &&
         php artisan key:generate --force &&
         php artisan migrate:fresh --seed --force &&
         php-fpm
@@ -60,6 +62,8 @@ services:
       sh -c "
         cd /var/www/html &&
         composer update --no-dev --optimize-autoloader &&
+        npm install &&
+        npm run build &&
         php artisan key:generate --force &&
         php-fpm
       "
