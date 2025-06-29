@@ -44,7 +44,7 @@ services:
     container_name: php_app2
     volumes:
       - ./laravel-app:/var/www/html
-      - ./.env.server1:/var/www/html/.env
+      - ./.env.server2:/var/www/html/.env
       - ./entrypoint.sh:/entrypoint.sh
     depends_on:
       mysql:
