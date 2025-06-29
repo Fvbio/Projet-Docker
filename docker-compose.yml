@@ -1,5 +1,5 @@
 services:
-  # Base de données MySQL partagée
+  # Base de données MySQL 
   mysql:
     image: mysql:8.0
     container_name: mysql_db
@@ -85,6 +85,22 @@ services:
       - ./laravel-app:/var/www/html
     depends_on:
       - php2
+    networks:
+      - laravel_network
+
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: laravel_user
+      PMA_PASSWORD: laravel_password
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql
     networks:
       - laravel_network
 
