@@ -1,5 +1,10 @@
 # Projet Docker Final - 3IW
 
+## Réalisé par :
+- Maïssane ABDALLAH
+- Yacine BOUALI
+- Fabio MARQUES TAVARES
+
 ## Description
 Architecture Docker avec 2 serveurs Nginx, 2 services PHP-FPM et une base MySQL partagée.
 
